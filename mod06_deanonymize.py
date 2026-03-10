@@ -18,8 +18,10 @@ def link_records(anon_df, aux_df):
       anon_id, matched_name
     containing ONLY uniquely matched records.
     """
-    raise NotImplementedError
-
+    identifiers = ['age', 'zip3', 'gender']
+    combined = pd.merge(anon_df, aux_df, col = identifiers, type = 'inner')
+    res = combined[['anon_id', 'name']].copy()
+    return res
 
 def deanonymization_rate(matches_df, anon_df):
     """
