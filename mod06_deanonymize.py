@@ -22,6 +22,7 @@ def link_records(anon_df, aux_df):
     combined = pd.merge(anon_df, aux_df, on = identifiers, how = 'inner')
     unique = combined[~combined['anon_id'].duplicated(keep=False)]
     res = unique[['anon_id', 'name']]
+    res = res.rename(columns={'name': 'matched_name'})
     return res
 
 def deanonymization_rate(matches_df, anon_df):
